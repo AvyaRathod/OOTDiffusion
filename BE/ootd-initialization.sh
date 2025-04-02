@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Clone the main repo
-git clone https://github.com/levihsu/OOTDiffusion
+git clone https://github.com/AvyaRathod/OOTDiffusion
 cd OOTDiffusion
 
 # Install Homebrew (Linux)
