@@ -16,7 +16,11 @@ from ootd.inference_ootd_dc import OOTDiffusionDC
 from ootd.inference_ootd_hd import OOTDiffusionHD  # 👈 Added HD model
 from run.utils_ootd import get_mask_location
 
+
+
 app = Flask(__name__)
+
+models = {'hd' : OOTDiffusionHD(), 'dc': OOTDiffusionDC()}
 
 CATEGORY_DICT = ['upperbody', 'lowerbody', 'dress']
 CATEGORY_UTILS = ['upper_body', 'lower_body', 'dresses']
@@ -48,7 +52,7 @@ def run_ootd_inference(model_img, cloth_img, category, image_scale, n_samples, n
     mask_gray = mask_gray.resize((768, 1024), Image.NEAREST)
     masked_vton_img = Image.composite(mask_gray, model_img, mask)
 
-    model = OOTDiffusionHD(gpu_id) if model_type == 'hd' else OOTDiffusionDC(gpu_id)
+    model = models[model_type]
 
     result_images = model(
         model_type=model_type,
